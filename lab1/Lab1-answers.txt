@@ -1,0 +1,21 @@
+Q1: What is the difference between EBS and S3?
+
+EBS stands for Elastic Block Storage and is persistent storage available to EC2 instances. EBS storage volumes can be saved, they can be partitioned, rationed for EC2 instances or strung together to form larger EBS volumes. EBS storage is more expensive than S3 but typically comes with faster I/O. It is used inc ase data needs to be accessed quickly and frequently. EBS can be I/O optimized for faster throughput at varying costs - higher I/O speeds for higher costs. EBS volumes can be viewed as a drive on a Linux filesystem with partitions and related properties. 
+
+S3 stands for Simple Storage Service and is a cheaper storage that AWS makes available for use cases that involve data that does not need to be accessed frequently. Access to S3 typically has fixed I/O speeds and bandwidth. S3 storage is organized in buckets with special APIs and commands that AWS and other third-parties provide for access. Each file in S3 is treated as an object. One advantage of S3 is that it is publicly available and therefore can be accessed directly by applications in the public cloud. This may be a disadvantage in the case where this poses a security risk to the data.
+
+Q2: When would you consider a cloud infrastructure for your data science tasks?
+
+I would consider a cloud infrastructure for the following uses (1) flexibility in modeling/architecting the data/computing pipeline with multiple tools/technologies and (2) where the infrastructure needs to be made available to a diverse set of users and applications spread across several locations and (3) for use cases where the ability to scale out is essential. 
+
+Q3: What is the difference between spot instances and reserved instances?
+
+Spot instances can be viewed as on-demand instances and are typically used when it is unclear upfront if EC2 instances are required for a longer duration. Reserved instances are EC2 instances that are reserved for the duration of a year or longer. In the long run reserved instances are cheaper than spot instances 
+
+Q4: List the names of four software packages installed on the UCB AMI
+
+[root@ip-172-31-3-251 ~]# rpm -aq |more
+hadoop-2.6.0+cdh5.4.5+626-1.cdh5.4.5.p0.8.el6.x86_64
+iputils-20071127-17.el6_4.2.x86_64
+setup-2.8.14-20.el6_4.1.noarch
+hadoop-mapreduce-historyserver-2.6.0+cdh5.4.5+626-1.cdh5.4.5.p0.8.el6.x86_64

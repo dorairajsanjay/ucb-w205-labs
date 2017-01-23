@@ -1,4 +1,4 @@
-List the HDFS contents of /user
+1. List the HDFS contents of /user
 
 [w205@ip-172-31-18-90 ~]$ hdfs dfs -ls /user
 Found 8 items
@@ -12,7 +12,7 @@ drwxr-xr-x   - hdfs    supergroup          0 2017-01-23 16:24 /user/spark
 drwxr-xr-x   - w205    supergroup          0 2017-01-23 16:28 /user/w205
 [w205@ip-172-31-18-90 ~]$ 
 
-Inspect the output of the HDFS admin report and answer the following questions in a text file.
+2. Inspect the output of the HDFS admin report and answer the following questions in a text file.
 
 -To generate this, exit from the w205 user and type: sudo -u hdfs hdfs dfsadmin -report
 

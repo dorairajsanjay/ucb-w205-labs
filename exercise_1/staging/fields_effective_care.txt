@@ -1,0 +1,11 @@
+CREATE EXTERNAL TABLE fields_effective_care (
+provider_id,DATATYPE,hospital_name,DATATYPE,address,DATATYPE,city,DATATYPE,state,DATATYPE,zip_code,DATATYPE,county_name,DATATYPE,phone_number,DATATYPE,condition,DATATYPE,measure_id,DATATYPE,measure_name,DATATYPE,score,DATATYPE,sample,DATATYPE,footnote,DATATYPE,measure_start_date,DATATYPE,measure_end_date_,,DATATYPE,
+)\n
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES(
+"separatorChar"=",",
+"quoteChar"='"',
+"escapeChar" = '\\'
+)
+STORED AS TEXTFILE
+LOCATION /user/w205/hospital_compare/effective_care.csv;

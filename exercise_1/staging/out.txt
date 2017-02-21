@@ -1,0 +1,579 @@
++ files=("hospitals effective_care readmissions measures surveys_responses")
++ ext=.csv
++ outsqlfile=hive_base_ddl.sql
++ init
++ echo Initialization...
++ echo -n ''
++ generate_ddl
++ echo 'Generate data definition'
++ echo 'Individual table DDL are moved to corresponding txt files and consolidated DDL is moved into .sql file'
++ echo ''
++ for file in '$files'
++ head -1 hospitals.csv
++ cat fields_hospitals.txt
++ tr '[:upper:]' '[:lower:]'
++ tr , '\n'
++ tr '"' ' '
++ mv temp.csv fields_hospitals.txt
++ outfile=fields_hospitals.txt.tmp
++ echo 'CREATE EXTERNAL TABLE fields_hospitals ('
++ first_time=true
++ cat fields_hospitals.txt
++ read line
++ echo 'provider id*STRING'
++ tr ' ' _
++ tr '\r\n' ,
++ tr '*' ' '
++ read line
++ echo 'hospital name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'address*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'city*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'state*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'zip code*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'county name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'phone number*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hospital type*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hospital ownership*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'emergency services *STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo -e '\b \b'
++ echo ''
++ echo ')'
++ echo 'ROW FORMAT SERDE '\''org.apache.hadoop.hive.serde2.OpenCSVSerde'\'''
++ echo 'WITH SERDEPROPERTIES('
++ echo '"separatorChar"=",",'
++ echo '"quoteChar"='\''"'\'','
++ echo '"escapeChar" = '\''\\'\'''
++ echo ')'
++ echo 'STORED AS TEXTFILE'
++ echo 'LOCATION '\''/user/w205/hospital_compare/hospitals'\'';'
++ cat fields_hospitals.txt.tmp
++ echo ''
++ mv fields_hospitals.txt.tmp fields_hospitals.txt
++ sed -i 's/_ STRING/ STRING/g' hive_base_ddl.sql
++ sed -i 's/_ STRING/ STRING/g' fields_hospitals.txt
++ sed -i 's/, STRING,)/ STRING)/g' hive_base_ddl.sql
++ sed -i 's/, STRING,)/ STRING)/g' fields_hospitals.txt
++ for file in '$files'
++ head -1 effective_care.csv
++ cat fields_effective_care.txt
++ tr '[:upper:]' '[:lower:]'
++ tr , '\n'
++ mv temp.csv fields_effective_care.txt
++ outfile=fields_effective_care.txt.tmp
++ echo 'CREATE EXTERNAL TABLE fields_effective_care ('
++ first_time=true
++ cat fields_effective_care.txt
++ read line
++ echo 'provider id*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hospital name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'address*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'city*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'state*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'zip code*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'county name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'phone number*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'condition*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'measure id*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'measure name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'sample*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'footnote*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'measure start date*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'measure end date *STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo -e '\b \b'
++ echo ''
++ echo ')'
++ echo 'ROW FORMAT SERDE '\''org.apache.hadoop.hive.serde2.OpenCSVSerde'\'''
++ echo 'WITH SERDEPROPERTIES('
++ echo '"separatorChar"=",",'
++ echo '"quoteChar"='\''"'\'','
++ echo '"escapeChar" = '\''\\'\'''
++ echo ')'
++ echo 'STORED AS TEXTFILE'
++ echo 'LOCATION '\''/user/w205/hospital_compare/effective_care'\'';'
++ cat fields_effective_care.txt.tmp
++ echo ''
++ mv fields_effective_care.txt.tmp fields_effective_care.txt
++ sed -i 's/_ STRING/ STRING/g' hive_base_ddl.sql
++ sed -i 's/_ STRING/ STRING/g' fields_effective_care.txt
++ sed -i 's/, STRING,)/ STRING)/g' hive_base_ddl.sql
++ sed -i 's/, STRING,)/ STRING)/g' fields_effective_care.txt
++ for file in '$files'
++ head -1 readmissions.csv
++ cat fields_readmissions.txt
++ tr '[:upper:]' '[:lower:]'
++ tr '"' ' '
++ tr , '\n'
++ mv temp.csv fields_readmissions.txt
++ outfile=fields_readmissions.txt.tmp
++ echo 'CREATE EXTERNAL TABLE fields_readmissions ('
++ first_time=true
++ cat fields_readmissions.txt
++ read line
++ echo 'provider id*STRING'
++ tr ' ' _
++ tr '\r\n' ,
++ tr '*' ' '
++ read line
++ echo 'hospital name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'address*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'city*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'state*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'zip code*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'county name*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'phone number*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'measure name*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'measure id*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'compared to national*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'denominator*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'score*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'lower estimate*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'higher estimate*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'footnote*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'measure start date*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'measure end date *STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo -e '\b \b'
++ echo ''
++ echo ')'
++ echo 'ROW FORMAT SERDE '\''org.apache.hadoop.hive.serde2.OpenCSVSerde'\'''
++ echo 'WITH SERDEPROPERTIES('
++ echo '"separatorChar"=",",'
++ echo '"quoteChar"='\''"'\'','
++ echo '"escapeChar" = '\''\\'\'''
++ echo ')'
++ echo 'STORED AS TEXTFILE'
++ echo 'LOCATION '\''/user/w205/hospital_compare/readmissions'\'';'
++ cat fields_readmissions.txt.tmp
++ echo ''
++ mv fields_readmissions.txt.tmp fields_readmissions.txt
++ sed -i 's/_ STRING/ STRING/g' hive_base_ddl.sql
++ sed -i 's/_ STRING/ STRING/g' fields_readmissions.txt
++ sed -i 's/, STRING,)/ STRING)/g' hive_base_ddl.sql
++ sed -i 's/, STRING,)/ STRING)/g' fields_readmissions.txt
++ for file in '$files'
++ head -1 measures.csv
++ cat fields_measures.txt
++ tr '[:upper:]' '[:lower:]'
++ tr , '\n'
++ tr '"' ' '
++ mv temp.csv fields_measures.txt
++ outfile=fields_measures.txt.tmp
++ echo 'CREATE EXTERNAL TABLE fields_measures ('
++ first_time=true
++ cat fields_measures.txt
++ read line
++ echo 'measure name*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'measure id*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'measure start quarter*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'measure start date*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'measure end quarter*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'measure end date *STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo -e '\b \b'
++ echo ''
++ echo ')'
++ echo 'ROW FORMAT SERDE '\''org.apache.hadoop.hive.serde2.OpenCSVSerde'\'''
++ echo 'WITH SERDEPROPERTIES('
++ echo '"separatorChar"=",",'
++ echo '"quoteChar"='\''"'\'','
++ echo '"escapeChar" = '\''\\'\'''
++ echo ')'
++ echo 'STORED AS TEXTFILE'
++ echo 'LOCATION '\''/user/w205/hospital_compare/measures'\'';'
++ cat fields_measures.txt.tmp
++ echo ''
++ mv fields_measures.txt.tmp fields_measures.txt
++ sed -i 's/_ STRING/ STRING/g' hive_base_ddl.sql
++ sed -i 's/_ STRING/ STRING/g' fields_measures.txt
++ sed -i 's/, STRING,)/ STRING)/g' hive_base_ddl.sql
++ sed -i 's/, STRING,)/ STRING)/g' fields_measures.txt
++ for file in '$files'
++ head -1 surveys_responses.csv
++ cat fields_surveys_responses.txt
++ tr '[:upper:]' '[:lower:]'
++ tr , '\n'
++ tr '"' ' '
++ mv temp.csv fields_surveys_responses.txt
++ outfile=fields_surveys_responses.txt.tmp
++ echo 'CREATE EXTERNAL TABLE fields_surveys_responses ('
++ first_time=true
++ cat fields_surveys_responses.txt
++ read line
++ echo 'provider number*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hospital name*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'address*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'city*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'state*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'zip code*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'county name*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'communication with nurses achievement points*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'communication with nurses improvement points*STRING'
++ tr ' ' _
++ tr '\r\n' ,
++ tr '*' ' '
++ read line
++ echo 'communication with nurses dimension score*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'communication with doctors achievement points*STRING'
++ tr ' ' _
++ tr '\r\n' ,
++ tr '*' ' '
++ read line
++ echo 'communication with doctors improvement points*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'communication with doctors dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'responsiveness of hospital staff achievement points*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ tr ' ' _
++ tr '\r\n' ,
++ echo 'responsiveness of hospital staff improvement points*STRING'
++ tr '*' ' '
++ read line
++ echo 'responsiveness of hospital staff dimension score*STRING'
++ tr '*' ' '
++ tr '\r\n' ,
++ tr ' ' _
++ read line
++ echo 'pain management achievement points*STRING'
++ tr ' ' _
++ tr '*' ' '
++ tr '\r\n' ,
++ read line
++ echo 'pain management improvement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'pain management dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'communication about medicines achievement points*STRING'
++ tr ' ' _
++ tr '\r\n' ,
++ tr '*' ' '
++ read line
++ echo 'communication about medicines improvement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'communication about medicines dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'cleanliness and quietness of hospital environment achievement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'cleanliness and quietness of hospital environment improvement points*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo 'cleanliness and quietness of hospital environment dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'discharge information achievement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'discharge information improvement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'discharge information dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'overall rating of hospital achievement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'overall rating of hospital improvement points*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'overall rating of hospital dimension score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hcahps base score*STRING'
++ tr '\r\n' ,
++ tr '*' ' '
++ tr ' ' _
++ read line
++ echo 'hcahps consistency score*STRING'
++ tr '\r\n' ,
++ tr ' ' _
++ tr '*' ' '
++ read line
++ echo -e '\b \b'
++ echo ''
++ echo ')'
++ echo 'ROW FORMAT SERDE '\''org.apache.hadoop.hive.serde2.OpenCSVSerde'\'''
++ echo 'WITH SERDEPROPERTIES('
++ echo '"separatorChar"=",",'
++ echo '"quoteChar"='\''"'\'','
++ echo '"escapeChar" = '\''\\'\'''
++ echo ')'
++ echo 'STORED AS TEXTFILE'
++ echo 'LOCATION '\''/user/w205/hospital_compare/surveys_responses'\'';'
++ cat fields_surveys_responses.txt.tmp
++ echo ''
++ mv fields_surveys_responses.txt.tmp fields_surveys_responses.txt
++ sed -i 's/_ STRING/ STRING/g' hive_base_ddl.sql
++ sed -i 's/_ STRING/ STRING/g' fields_surveys_responses.txt
++ sed -i 's/, STRING,)/ STRING)/g' hive_base_ddl.sql
++ sed -i 's/, STRING,)/ STRING)/g' fields_surveys_responses.txt

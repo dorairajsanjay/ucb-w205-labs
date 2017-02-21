@@ -1,6 +1,5 @@
 CREATE EXTERNAL TABLE fields_measures (
-measure_name,DATATYPE,measure_id,DATATYPE,measure_start_quarter,DATATYPE,measure_start_date,DATATYPE,measure_end_quarter,DATATYPE,measure_end_date_,,DATATYPE,
-)\n
+measure_name STRING,measure_id STRING,measure_start_quarter STRING,measure_start_date STRING,measure_end_quarter STRING,measure_end_date_ STRING)
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES(
 "separatorChar"=",",
@@ -8,4 +7,4 @@ WITH SERDEPROPERTIES(
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION /user/w205/hospital_compare/measures.csv;
+LOCATION '/user/w205/hospital_compare/measures';

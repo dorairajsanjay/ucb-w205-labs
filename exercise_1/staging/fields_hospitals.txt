@@ -1,6 +1,5 @@
 CREATE EXTERNAL TABLE fields_hospitals (
-provider_id,DATATYPE,hospital_name,DATATYPE,address,DATATYPE,city,DATATYPE,state,DATATYPE,zip_code,DATATYPE,county_name,DATATYPE,phone_number,DATATYPE,hospital_type,DATATYPE,hospital_ownership,DATATYPE,emergency_services_,,DATATYPE,
-)\n
+provider_id STRING,hospital_name STRING,address STRING,city STRING,state STRING,zip_code STRING,county_name STRING,phone_number STRING,hospital_type STRING,hospital_ownership STRING,emergency_services_ STRING)
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES(
 "separatorChar"=",",
@@ -8,4 +7,4 @@ WITH SERDEPROPERTIES(
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION /user/w205/hospital_compare/hospitals.csv;
+LOCATION '/user/w205/hospital_compare/hospitals';

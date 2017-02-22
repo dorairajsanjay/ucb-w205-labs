@@ -1,1 +1,0 @@
-LOCATION \'\/user\/w205\/hospital_compare\/temp\'

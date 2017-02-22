@@ -80,7 +80,8 @@ generate_ddl()
 		cat $outfile>>$outsqlfile
 		echo "">>$outsqlfile
 
-		mv $outfile fields_$file.txt
+		# comment out creation of individual ddl files 
+		#mv $outfile fields_$file.txt
 
 		# perform post processing clean-up on sql file and outfile
 		sed -i "s/_ STRING/ STRING/g"    $outsqlfile
@@ -89,6 +90,12 @@ generate_ddl()
 		sed -i "s/, STRING,)/ STRING)/g" fields_$file.txt
 	done
 
+}
+
+cleanup()
+{
+	# clean temperorary files created
+	rm temp*
 }
 
 init

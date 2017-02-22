@@ -1,4 +1,16 @@
 #!/bin/bash
+#title        : README.txt
+#author       : Sanjay Dorairaj
+#date         : Feb 23rd 2017
+#Description  : Performs the following operations
+#
+#   Perform initialization and cleanup of HDFS and local folders
+#     b) Fetch hospital data from the CMS site
+#     c) Load CSV files into HDFS
+#     d) Autogenerate DDL generation script from CSV files header
+#     e) Execute DDL script to create tables in HDFS via Hive
+#     f) Perform post processing cleanup
+#Prerequisites: Existing HDFS installation and access to command line Hive
 
 #set -x
 
@@ -143,7 +155,7 @@ generate_ddl()
 		outfile="./csvfiles/fields_$file.txt.tmp"
 
 		# drop any existing table with the same name
-		echo "DROP TABLE fields_$file;" >> $outfile
+		echo "DROP TABLE $file;" >> $outfile
 		echo "" >> $outfile
 
 		# build definition for table
@@ -172,7 +184,7 @@ generate_ddl()
 		echo "">>$outsqlfile
 
 		# comment out creation of individual ddl files 
-		mv $outfile fields_$file.txt
+		mv $outfile ./csvfiles/fields_$file.txt
 
 		# perform post processing clean-up on sql file and outfile
 		sed -i "s/_ STRING/ STRING/g"    $outsqlfile
@@ -225,19 +237,19 @@ cleanup()
 }
 
 #cleanup and initialization
-#init
+init
 
 #fetch hospital files
-#fetch_hospital_files
+fetch_hospital_files
 
 # populate into HDFS
-#populate_hdfs
+populate_hdfs
 
 # autoated DDL gneeration
-#generate_ddl
+generate_ddl
 
 # initialize tables in HDFS
-#initialize_tables_in_hdfs
+initialize_tables_in_hdfs
 
 # run the DDL and move tables into HDFS via Hive
 cleanup

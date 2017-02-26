@@ -93,14 +93,17 @@ generate_ddl()
 		echo ""
 		echo ")" >> $outfile
 	
-		echo "ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'" >> $outfile
-		echo "WITH SERDEPROPERTIES("    >> $outfile
-		echo "\"separatorChar\"=\",\"," >> $outfile
-		echo "\"quoteChar\"='\"',"      >> $outfile
-		echo "\"escapeChar\" = '\\\\'"  >> $outfile
-		echo ")"                        >> $outfile
+		echo "ROW FORMAT DELIMITED" >> $outfile
+		echo "FIELDS TERMINATED BY ','" >> $outfile
+		echo "LINES TERMINATED BY '\n'" >> $outfile
+		#echo "ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'" >> $outfile
+		#echo "WITH SERDEPROPERTIES("    >> $outfile
+		#echo "\"separatorChar\"=\",\"," >> $outfile
+		#echo "\"quoteChar\"='\"',"      >> $outfile
+		#echo "\"escapeChar\" = '\\\\'"  >> $outfile
+		#echo ")"                        >> $outfile
 		echo "STORED AS TEXTFILE;"       >> $outfile
-		e#cho "LOCATION '/user/w205/hospital_compare/$file';" >> $outfile
+		#echo "LOCATION '/user/w205/hospital_compare/$file';" >> $outfile
 	
 		cat $outfile>>$outsqlfile
 		echo "">>$outsqlfile

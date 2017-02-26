@@ -23,3 +23,17 @@ This command will
 	d) Autogenerate DDL generation script from CSV files header
 	e) Execute DDL script to create tables in HDFS via Hive
 	f) Perform post processing cleanup
+
+Part 2
+******
+
+1. cd to transforming folder
+2. Run the below command
+	sh transform_tables_in_data_lake.sh
+
+This command will
+	a) Perform initialization and cleanup
+	b) Extract field definition from export from ERD tool (https://www.lucidchart.com/publicSegments/view/837aeab7-1f26-4024-be9d-a524ebd0d9c5/image.png)
+	c) Automated DDL to generate newly transformed tables
+	d) Create these tables in HDFS from the DDL
+	e) Perform post processing cleanup

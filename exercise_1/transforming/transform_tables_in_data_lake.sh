@@ -1,5 +1,5 @@
 #!/bin/bash
-#title        : README.txt
+#title        : transform_tables_in_data_lake.sh
 #author       : Sanjay Dorairaj
 #date         : Feb 23rd 2017
 #Description  : Performs the following operations
@@ -7,9 +7,7 @@
 #	Convert SQL CREATE TABLE SYNTAX to hive CREATE TABLE COMMANDS
 #Prerequisites: Existing HDFS installation and access to command line Hive
 
-set -x
-
-# create folder in hdfs for data
+#set -x
 
 # specify list of files to load
 files=("hospitals effective_care readmissions measures surveys_responses")

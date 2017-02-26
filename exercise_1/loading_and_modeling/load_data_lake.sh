@@ -1,5 +1,5 @@
 #!/bin/bash
-#title        : README.txt
+#title        : load_data_lake.sh
 #author       : Sanjay Dorairaj
 #date         : Feb 23rd 2017
 #Description  : Performs the following operations

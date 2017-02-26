@@ -221,7 +221,7 @@ cleanup()
 {
 	echo ""
 	echo "*******************************************************"
-	echo "	   Automating generation of DDL from CSV files "
+	echo "	   Cleanup of temporary files and artifacts
 	echo "*******************************************************"
 
 	# clean temperorary files created

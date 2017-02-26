@@ -6,4 +6,4 @@ sc=SparkContext()
 
 rdd = HiveContext(sc).sql('select * from hospitals')
 
-rdd.write.mode('append').saveAsTable("new_hospitals")
+rdd.write.mode('overwrite').saveAsTable("new_hospitals")

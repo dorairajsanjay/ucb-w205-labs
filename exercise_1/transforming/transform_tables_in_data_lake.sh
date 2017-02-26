@@ -77,11 +77,11 @@ generate_ddl()
 		outfile="./csvfiles/fields_$file.txt.tmp"
 
 		# drop any existing table with the same name
-		echo "DROP TABLE new2$file;" >> $outfile
+		echo "DROP TABLE new$file;" >> $outfile
 		echo "" >> $outfile
 
 		# build definition for table
-		echo "CREATE TABLE new2$file (" >> $outfile
+		echo "CREATE TABLE new$file (" >> $outfile
 	
 		first_time=true
 		cat ./csvfiles/fields_$file.txt | while read line
@@ -168,6 +168,13 @@ generate_ddl
 
 # initialize tables in HDFS
 initialize_tables_in_hdfs
+
+# transform tables using pyspark
+pyspark new_hospitals.py
+pyspark new_effective_care.py
+pyspark new_readmissions.py
+pyspark new_measures.py
+pyspark new_surveys_responses.py
 
 # run the DDL and move tables into HDFS via Hive
 cleanup

@@ -10,4 +10,4 @@ rdd = rdd.withColumn("score",rdd["score"].cast(IntegerType()))
 rdd = rdd.withColumn("lower_estimate",rdd["lower_estimate"].cast(IntegerType()))
 rdd = rdd.withColumn("higher_estimate",rdd["higher_estimate"].cast(IntegerType()))
 
-rdd.write.mode('append').saveAsTable("new_readmissions")
+rdd.write.mode('overwrite').saveAsTable("new_readmissions")

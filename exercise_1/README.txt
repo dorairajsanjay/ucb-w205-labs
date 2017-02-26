@@ -6,6 +6,8 @@
 
 GitHub Location of Exercise 1: https://github.com/dorairajsanjay/ucb-w205-labs/tree/master/exercise_1
 
+Note that the load_and_modeling folder also contains a file called UcbW205Exercise1Erd.pdf which is the ERD diagram for 
+this project
 
 Part 1
 ******

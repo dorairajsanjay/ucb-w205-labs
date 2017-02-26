@@ -77,11 +77,11 @@ generate_ddl()
 		outfile="./csvfiles/fields_$file.txt.tmp"
 
 		# drop any existing table with the same name
-		echo "DROP TABLE new_$file;" >> $outfile
+		echo "DROP TABLE new2$file;" >> $outfile
 		echo "" >> $outfile
 
 		# build definition for table
-		echo "CREATE EXTERNAL TABLE new_$file (" >> $outfile
+		echo "CREATE TABLE new2$file (" >> $outfile
 	
 		first_time=true
 		cat ./csvfiles/fields_$file.txt | while read line

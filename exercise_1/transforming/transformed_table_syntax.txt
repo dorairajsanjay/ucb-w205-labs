@@ -13,7 +13,7 @@ CREATE TABLE "surveys_responses" (
   "pain_management_improvement_points" int,
   "pain_management_dimension_score" int,
   "communication_about_medicines_achievement_points" int,
-  "communication_about_medicines_improvement_points" string,
+  "communication_about_medicines_improvement_points" int,
   "communication_about_medicines_dimension_score" int,
   "cleanliness_and_quietness_of_hospital_environment_achievement_points" int,
   "cleanliness_and_quietness_of_hospital_environment_improvement_points" int,

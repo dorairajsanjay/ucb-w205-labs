@@ -221,7 +221,7 @@ cleanup()
 {
 	echo ""
 	echo "*******************************************************"
-	echo "	   Cleanup of temporary files and artifacts
+	echo "	   Cleanup of temporary files and artifacts          "
 	echo "*******************************************************"
 
 	# clean temperorary files created

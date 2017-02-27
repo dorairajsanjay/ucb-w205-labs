@@ -55,9 +55,9 @@ CREATE TABLE "measures" (
   "measure_id (Primary Key)" string,
   "measure_name" string,
   "measure_start_quarter" string,
-  "measure_start_date" date,
+  "measure_start_date" string,
   "measure_end_quarter" string,
-  "measure_end_date" date
+  "measure_end_date" string
 );
 
 CREATE TABLE "effective_care" (

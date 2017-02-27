@@ -31,4 +31,8 @@ rdd = rdd.map(lambda x: (x.provider_id,normalize_response1(x.communication_with_
 
 #temprdd.take(5).show()
 #rdd = sc.parallelize(rdd)
-rdd.toDF().write.mode('overwrite').saveAsTable("new_surveys_responses")
+
+
+#rdd.toDF().registerTempTable("new_surveys_responses")
+#HiveContext(sc).sql('create table new_surveys_responses as select * from new_surveys_responses')
+rdd.toDF().write.mode('append').saveAsTable("new_surveys_responses")

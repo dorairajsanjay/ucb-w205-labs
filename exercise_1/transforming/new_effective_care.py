@@ -8,4 +8,4 @@ rdd = HiveContext(sc).sql('select provider_id,measure_id,condition,score,sample,
 rdd = rdd.withColumn("score",rdd["score"].cast(IntegerType()))
 rdd = rdd.withColumn("sample",rdd["sample"].cast(IntegerType()))
 
-rdd.write.mode('overwrite').saveAsTable("new3_effective_care")
+rdd.write.mode('overwrite').saveAsTable("new_effective_care")

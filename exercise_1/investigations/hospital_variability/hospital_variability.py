@@ -23,24 +23,11 @@ hq_rdd.show(10)
 
 # Normalize scores to avoid any bias resulting in high value
 hq_rdd = hq_rdd.map(lambda x: (x[0],int( float(x[1]+x[2])/float(max_hcahps_base_score + max_hcahps_consistency_score)*10),int(float(x[3])/float(max_effective_care_score)*10),int(float(x[4])/float(max_readmissions_score)*10)))
-hq_rdd = hq_rdd.map(lambda x:(x[0], int(np.mean(x[1:3])),int(np.sum(x[1:3])))).toDF(['provider_id','avg_quality_score','agg_quality_score'])
 
 # show a sampling of the results
-print "\nSample of results in the normalized table"
-print "\nNormalization involves mapping the score between 0 and 10 and for readmissions"
-print "\nwhere lower scors are better subtracting from 10 to allow higher values to denote better quaity"
-hq_rdd.show(10)
+print "\nSummary Hospital Variability Statistics"
+print "\n***************************************"
 
-# Join the  quality RDD with the hospitals data to display the top hospitals
-hos_hq_rdd = hos_rdd.join(hq_rdd,hos_rdd.provider_id == hq_rdd.provider_id).drop(hq_rdd['provider_id']).sort('avg_quality_score',ascending=False)
+hq_rdd.toDF(['Provider Id','Overall HCAHPS Score','Effective Care Score','Readmissions Score']).describe().show()
 
-# Listing top 10 hospitals based on their overall quality score
-print "\n Displaying 10 hospitals based on their scores, average and aggregate scores"
-print "\n ***************************************************************************"
-hos_hq_rdd.select('provider_id','hospital_name','city','state','avg_quality_score','agg_quality_score').show(10)
-
-print "\n Displaying variability in hospital scores"
-print "\n *****************************************"
-hos_hq_rdd.describe().show()
-
-
+print "ps: Note that these scores have been normalized on a 0-10 scale with increasing scores indicating better scores"

@@ -1,3 +1,10 @@
+#title        : hospitals_and_patients
+#author       : Sanjay Dorairaj
+#date         : Feb 23rd 2017
+#Description  : Retrieves stats on patient quality vis-a-vis hospitals
+#
+#Prerequisites: Base tables must be created and accessible in HDFS
+
 from pyspark import HiveContext
 from pyspark import SparkContext
 from pyspark.sql.types import IntegerType

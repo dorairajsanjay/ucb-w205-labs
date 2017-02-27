@@ -1,3 +1,10 @@
+#title        : best_states
+#author       : Sanjay Dorairaj
+#date         : Feb 23rd 2017
+#Description  : Retrieves best states
+#
+#Prerequisites: base table must be created and accessible in HDFS
+
 from pyspark import HiveContext
 from pyspark import SparkContext
 from pyspark.sql.types import IntegerType

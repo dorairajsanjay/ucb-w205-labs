@@ -1,3 +1,10 @@
+#title        : hospital_variability
+#author       : Sanjay Dorairaj
+#date         : Feb 23rd 2017
+#Description  : Retrieves hospital variability numbers
+#
+#Prerequisites: Base tables must be created and accessible in HDFS
+
 from pyspark import HiveContext
 from pyspark import SparkContext
 from pyspark.sql.types import IntegerType

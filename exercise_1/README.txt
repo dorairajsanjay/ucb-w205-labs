@@ -9,12 +9,19 @@ GitHub Location of Exercise 1: https://github.com/dorairajsanjay/ucb-w205-labs/t
 Note that the load_and_modeling folder also contains a file called UcbW205Exercise1Erd.pdf which is the ERD diagram for 
 this project
 
+General Notes and Comments
+*************************
+
+1. Each sub-folder typically contains clean-up bash script to ensure that binaries and temporary files can be cleaned out before being pushed out to git
+
 Part 1
 ******
 
 1. cd to load_and_modeling folder
 2. Run the below command
    sh load_data_lake.sh
+
+Note that this folder also contains the ERD diagram for this exercise
 
 This command will	
 	a) Perform initialization and cleanup of HDFS and local folders
@@ -37,3 +44,17 @@ This command will
 	c) Automated DDL to generate newly transformed tables
 	d) Create these tables in HDFS from the DDL
 	e) Perform post processing cleanup
+
+
+PART 3 - Investigations
+***********************
+
+1. cd to the inverstigations folder
+2. There are four directories here
+-> best_hospitals - contains the code needed to list the best hospitals based on their normalized quality score
+-> best_states - contains the code needed to list the best states based on their hospital quality score
+-> hospital_variability - contains the code needed to list the variability among hospital quality scores
+-> hospitals_and_patients - contains the code needed to list the quality of hospitals across each dimension of the HCAHPS score
+
+***Note***: Please ensure you run the hive_base_ddl.sql file in the best_hospitals folder since all subsequent investigation outputs depend on this
+

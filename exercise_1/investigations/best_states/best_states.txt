@@ -1,0 +1,55 @@
+In this section, we list the top 10 hospitals and explain the rationale behind our investigation.
+
+Hospital data has several sets of interesting information regarding hospital quality. This quality data can
+grouped under three broad categories
+
+1. HCAHPS scores - based on patient quality surveys
+2. Readmissions quality socres
+3. Effective care quality scores.
+
+Each of these scores have different min/max values and different distributions. 
+
+The HCAHPS scores are surveys
+on different scales (1 to 9 OR 1 to 10 OR sometimes just a single numerical value). HCAHPS scores summaries
+are captured in two values hcahps_base_score and hcahps_consistency_score that together capture the total
+score for the patient quality experience.
+
+Readmissions quality scores refer to the quality of readmissions and talk about the number of readmissions.
+The lower the number the better.
+
+Effective care refers to how effective the treatment of care has been. It captures the numbers of complications
+resulting from existing treatments and so on.
+
+Given the diverse nature of each of these different scores, this assignment normalizes all the scores on a scale
+of 0 to 10 and uses this scale to compare performance.
+
+ Displaying best hospitals by state (Scale 0-10)
+ ***********************************************
++-----+------------------+
+|state|avg(quality_score)|
++-----+------------------+
+|   ME|          5.388889|
+|   NH|          5.076923|
+|   NC|          5.047059|
+|   VT|               5.0|
+|   HI|               5.0|
+|   WI|               5.0|
+|   SC|          4.943396|
+|   MN|         4.7916665|
+|   IN|          4.780488|
+|   SD|              4.75|
+|   LA|            4.7375|
+|   MA|         4.7090907|
+|   DE|         4.6666665|
+|   NE|          4.652174|
+|   IL|          4.639344|
+|   CO|         4.6363635|
+|   OH|             4.624|
+|   VA|         4.5694447|
+|   TX|          4.559387|
+|   MO|          4.547945|
++-----+------------------+
+only showing top 20 rows
+
+
+

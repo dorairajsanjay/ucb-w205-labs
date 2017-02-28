@@ -1,0 +1,299 @@
+In this section, we list the top 10 hospitals and explain the rationale behind our investigation.
+
+Hospital data has several sets of interesting information regarding hospital quality. This quality data can
+grouped under three broad categories
+
+1. HCAHPS scores - based on patient quality surveys
+2. Readmissions quality socres
+3. Effective care quality scores.
+
+Each of these scores have different min/max values and different distributions. 
+
+The HCAHPS scores are surveys
+on different scales (1 to 9 OR 1 to 10 OR sometimes just a single numerical value). HCAHPS scores summaries
+are captured in two values hcahps_base_score and hcahps_consistency_score that together capture the total
+score for the patient quality experience.
+
+The HCAHPS scores capture patient quality experience and are therefore the
+focus on this section of the analysis. Here we look at each of the HCAHPS
+survey responses and look at how hospitals have scored in each dimension as
+well as in the summary values of base_score and consistency_score
+
+Here, we show the top 10 hospitals in each category ordered by each of Patient
+Experience Scores
+
+************************************************************************************************
+
+ Top 10 - Communication with Nurses
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further
+details.
++-----------+--------------------+--------------+-----+-----------------------------------------+
+|provider_id|       hospital_name|
+city|state|communication_with_nurses_dimension_score|
++-----------+--------------------+--------------+-----+-----------------------------------------+
+|     040011|CHAMBERS MEMORIAL...|      DANVILLE|   AR|
+10|
+|     050766|SUTTER SURGICAL H...|     YUBA CITY|   CA|
+10|
+|     040134|ARKANSAS HEART HO...|   LITTLE ROCK|   AR|
+10|
+|     040147|ARKANSAS SURGICAL...|NO LITTLE ROCK|   AR|
+10|
+|     010022|CHEROKEE MEDICAL ...|        CENTRE|   AL|
+10|
+|     040152|PHYSICIANS' SPECI...|  FAYETTEVILLE|   AR|
+10|
+|     010047|GEORGIANA MEDICAL...|     GEORGIANA|   AL|
+10|
+|     050234|SHARP CORONADO HO...|      CORONADO|   CA|
+10|
+|     010120|MONROE COUNTY HOS...|   MONROEVILLE|   AL|
+10|
+|     050537|SUTTER DAVIS HOSP...|         DAVIS|   CA|
+10|
++-----------+--------------------+--------------+-----+-----------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Communication with Doctors
++-----------+--------------------+-----------+-----+------------------------------------------+
+|provider_id|       hospital_name|
+city|state|communication_with_doctors_dimension_score|
++-----------+--------------------+-----------+-----+------------------------------------------+
+|     010120|MONROE COUNTY HOS...|MONROEVILLE|   AL|
+10|
+|     010034|COMMUNITY HOSPITA...|  TALLASSEE|   AL|
+10|
+|     040051|DREW MEMORIAL HOS...| MONTICELLO|   AR|
+10|
+|     010044|MARION REGIONAL M...|   HAMILTON|   AL|
+10|
+|     010045|FAYETTE MEDICAL C...|    FAYETTE|   AL|
+10|
+|     010129|NORTH BALDWIN INF...|BAY MINETTE|   AL|
+10|
+|     010047|GEORGIANA MEDICAL...|  GEORGIANA|   AL|
+10|
+|     010148|EVERGREEN MEDICAL...|  EVERGREEN|   AL|
+10|
+|     010007|MIZELL MEMORIAL H...|        OPP|   AL|
+10|
+|     010169|ATMORE COMMUNITY ...|     ATMORE|   AL|
+10|
++-----------+--------------------+-----------+-----+------------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Responsiveness of Hospital Staff
++-----------+--------------------+--------------+-----+------------------------------------------------+
+|provider_id|       hospital_name|
+city|state|responsiveness_of_hospital_staff_dimension_score|
++-----------+--------------------+--------------+-----+------------------------------------------------+
+|     030112|ARIZONA ORTHOPEDI...|      CHANDLER|   AZ|
+10|
+|     050766|SUTTER SURGICAL H...|     YUBA CITY|   CA|
+10|
+|     030132|FLORENCE HOSPITAL...|      FLORENCE|   AZ|
+10|
+|     030108|CORE INSTITUTE SP...|       PHOENIX|   AZ|
+10|
+|     040134|ARKANSAS HEART HO...|   LITTLE ROCK|   AR|
+10|
+|     040147|ARKANSAS SURGICAL...|NO LITTLE ROCK|   AR|
+10|
+|     010097|ELMORE COMMUNITY ...|      WETUMPKA|   AL|
+10|
+|     040152|PHYSICIANS' SPECI...|  FAYETTEVILLE|   AR|
+10|
+|     030107|ARIZONA SPINE AND...|          MESA|   AZ|
+10|
+|     050697|PATIENTS' HOSPITA...|       REDDING|   CA|
+10|
++-----------+--------------------+--------------+-----+------------------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Pain Management Achievement
++-----------+--------------------+--------------+-----+-------------------------------+
+|provider_id|       hospital_name|
+city|state|pain_management_dimension_score|
++-----------+--------------------+--------------+-----+-------------------------------+
+|     050766|SUTTER SURGICAL H...|     YUBA CITY|   CA|
+10|
+|     150153|ST VINCENT HEART ...|  INDIANAPOLIS|   IN|
+10|
+|     050769|HOAG ORTHOPEDIC I...|        IRVINE|   CA|
+10|
+|     010065|    RUSSELL HOSPITAL|ALEXANDER CITY|   AL|
+10|
+|     060117|ANIMAS SURGICAL H...|       DURANGO|   CO|
+10|
+|     100106|DOCTOR'S MEMORIAL...|         PERRY|   FL|
+10|
+|     140145| ST JOSEPHS HOSPITAL|        BREESE|   IL|
+10|
+|     100313|SACRED HEART HOSP...|PORT SAINT JOE|   FL|
+10|
+|     040152|PHYSICIANS' SPECI...|  FAYETTEVILLE|   AR|
+10|
+|     100314|WEST KENDALL BAPT...|         MIAMI|   FL|
+10|
++-----------+--------------------+--------------+-----+-------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Communication about medicines
++-----------+--------------------+--------------+-----+---------------------------------------------+
+|provider_id|       hospital_name|
+city|state|communication_about_medicines_dimension_score|
++-----------+--------------------+--------------+-----+---------------------------------------------+
+|     040011|CHAMBERS MEMORIAL...|      DANVILLE|   AR|
+10|
+|     100313|SACRED HEART HOSP...|PORT SAINT JOE|   FL|
+10|
+|     040147|ARKANSAS SURGICAL...|NO LITTLE ROCK|   AR|
+10|
+|     010044|MARION REGIONAL M...|      HAMILTON|   AL|
+10|
+|     040152|PHYSICIANS' SPECI...|  FAYETTEVILLE|   AR|
+10|
+|     010045|FAYETTE MEDICAL C...|       FAYETTE|   AL|
+10|
+|     050697|PATIENTS' HOSPITA...|       REDDING|   CA|
+10|
+|     010099|D W MCMILLAN MEMO...|       BREWTON|   AL|
+10|
+|     050708|FRESNO SURGICAL H...|        FRESNO|   CA|
+10|
+|     030107|ARIZONA SPINE AND...|          MESA|   AZ|
+10|
++-----------+--------------------+--------------+-----+---------------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Cleanliness and quietness of hospital environment
++-----------+--------------------+--------------+-----+-----------------------------------------------------------------+
+|provider_id|       hospital_name|
+city|state|cleanliness_and_quietness_of_hospital_environment_dimension_score|
++-----------+--------------------+--------------+-----+-----------------------------------------------------------------+
+|     040147|ARKANSAS SURGICAL...|NO LITTLE ROCK|   AR|
+10|
+|     010044|MARION REGIONAL M...|      HAMILTON|   AL|
+10|
+|     060117|ANIMAS SURGICAL H...|       DURANGO|   CO|
+10|
+|     040152|PHYSICIANS' SPECI...|  FAYETTEVILLE|   AR|
+10|
+|     010045|FAYETTE MEDICAL C...|       FAYETTE|   AL|
+10|
+|     050697|PATIENTS' HOSPITA...|       REDDING|   CA|
+10|
+|     030108|CORE INSTITUTE SP...|       PHOENIX|   AZ|
+10|
+|     050708|FRESNO SURGICAL H...|        FRESNO|   CA|
+10|
+|     030120|    GILBERT HOSPITAL|       GILBERT|   AZ|
+10|
+|     050726|STANISLAUS SURGIC...|       MODESTO|   CA|
+10|
++-----------+--------------------+--------------+-----+-----------------------------------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Discharge Information
++-----------+--------------------+----------------+-----+-------------------------------------+
+|provider_id|       hospital_name|
+city|state|discharge_information_dimension_score|
++-----------+--------------------+----------------+-----+-------------------------------------+
+|     030112|ARIZONA ORTHOPEDI...|        CHANDLER|   AZ|
+10|
+|     050708|FRESNO SURGICAL H...|          FRESNO|   CA|
+10|
+|     030120|    GILBERT HOSPITAL|         GILBERT|   AZ|
+10|
+|     020012|FAIRBANKS MEMORIA...|       FAIRBANKS|   AK|
+10|
+|     030131|      OASIS HOSPITAL|         PHOENIX|   AZ|
+10|
+|     040152|PHYSICIANS' SPECI...|    FAYETTEVILLE|   AR|
+10|
+|     030107|ARIZONA SPINE AND...|            MESA|   AZ|
+10|
+|     050234|SHARP CORONADO HO...|        CORONADO|   CA|
+10|
+|     030088|BANNER BAYWOOD ME...|            MESA|   AZ|
+10|
+|     050352|BARTON MEMORIAL H...|SOUTH LAKE TAHOE|   CA|
+10|
++-----------+--------------------+----------------+-----+-------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - Overall Rating of Hospital
++-----------+--------------------+------------+-----+------------------------------------------+
+|provider_id|       hospital_name|
+city|state|overall_rating_of_hospital_dimension_score|
++-----------+--------------------+------------+-----+------------------------------------------+
+|     050537|SUTTER DAVIS HOSP...|       DAVIS|   CA|
+10|
+|     060117|ANIMAS SURGICAL H...|     DURANGO|   CO|
+10|
+|     050609|KAISER FOUNDATION...|     ANAHEIM|   CA|
+10|
+|     030107|ARIZONA SPINE AND...|        MESA|   AZ|
+10|
+|     050697|PATIENTS' HOSPITA...|     REDDING|   CA|
+10|
+|     040134|ARKANSAS HEART HO...| LITTLE ROCK|   AR|
+10|
+|     050708|FRESNO SURGICAL H...|      FRESNO|   CA|
+10|
+|     040152|PHYSICIANS' SPECI...|FAYETTEVILLE|   AR|
+10|
+|     050714|SUTTER MATERNITY ...|  SANTA CRUZ|   CA|
+10|
+|     050726|STANISLAUS SURGIC...|     MODESTO|   CA|
+10|
++-----------+--------------------+------------+-----+------------------------------------------+
+only showing top 10 rows
+
+
+ Top 10 - HCAHPS Base Score
++-----------+--------------------+------------+-----+-----------------+
+|provider_id|       hospital_name|        city|state|hcahps_base_score|
++-----------+--------------------+------------+-----+-----------------+
+|     190259|LAFAYETTE SURGICA...|   LAFAYETTE|   LA|               80|
+|     390324|PHYSICIAN'S CARE ...|  ROYERSFORD|   PA|               80|
+|     190261|OUACHITA COMMUNIT...| WEST MONROE|   LA|               80|
+|     040152|PHYSICIANS' SPECI...|FAYETTEVILLE|   AR|               80|
+|     190263|HEART HOSPITAL OF...|   LAFAYETTE|   LA|               80|
+|     110200|NORTHSIDE MEDICAL...|    COLUMBUS|   GA|               80|
+|     190267|FAIRWAY MEDICAL C...|   COVINGTON|   LA|               80|
+|     180149|WESTLAKE REGIONAL...|    COLUMBIA|   KY|               80|
+|     280131|MIDWEST SURGICAL ...|       OMAHA|   NE|               80|
+|     390323|ADVANCED SURGICAL...|  WASHINGTON|   PA|               80|
++-----------+--------------------+------------+-----+-----------------+
+only showing top 10 rows
+
+
+ Top 10 - HCAHPS Consistency Score
++-----------+--------------------+----------+-----+------------------------+
+|provider_id|       hospital_name|      city|state|hcahps_consistency_score|
++-----------+--------------------+----------+-----+------------------------+
+|     010044|MARION REGIONAL M...|  HAMILTON|   AL|                      20|
+|     010085|DECATUR MORGAN HO...|   DECATUR|   AL|                      20|
+|     010045|FAYETTE MEDICAL C...|   FAYETTE|   AL|                      20|
+|     010005|MARSHALL MEDICAL ...|      BOAZ|   AL|                      20|
+|     010047|GEORGIANA MEDICAL...| GEORGIANA|   AL|                      20|
+|     010019|HELEN KELLER MEMO...| SHEFFIELD|   AL|                      20|
+|     010049|MEDICAL CENTER EN...|ENTERPRISE|   AL|                      20|
+|     010029|EAST ALABAMA MEDI...|   OPELIKA|   AL|                      20|
+|     010055|    FLOWERS HOSPITAL|    DOTHAN|   AL|                      20|
+|     010034|COMMUNITY HOSPITA...| TALLASSEE|   AL|                      20|
++-----------+--------------------+----------+-----+------------------------+
+only showing top 10 rows
+
+
+

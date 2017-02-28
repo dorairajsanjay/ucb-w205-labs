@@ -1,0 +1,58 @@
+In this section, we list the top 10 hospitals and explain the rationale behind our investigation.
+
+Hospitals data has several sets of interesting information regarding hospital quality. This quality data can
+grouped under three broad categories
+
+1. HCAHPS scores - based on patient quality surveys
+2. Readmissions quality socres
+3. Effective care quality scores.
+
+Each of these scores have different min/max values and different distributions. 
+
+The HCAHPS scores are surveys
+on different scales (1 to 9 OR 1 to 10 OR sometimes just a single numerical value). HCAHPS scores summaries
+are captured in two values hcahps_base_score and hcahps_consistency_score that together capture the total
+score for the patient quality experience.
+
+Readmissions quality scores refer to the quality of readmissions and talk about the number of readmissions.
+The lower the number the better.
+
+Effective care refers to how effective the treatment of care has been. It captures the numbers of complications
+resulting from existing treatments and so on.
+
+Given the diverse nature of each of these different scores, this assignment normalizes all the scores on a scale
+of 0 to 10 and uses this scale to compare performance.
+
+ Displaying 10 hospitals based on their scores, average and aggregate scores
+ ***************************************************************************
+
++-----------+--------------------+-----------+-----+-----------------+-----------------+
+|provider_id|       hospital_name|       city|state|avg_quality_score|agg_quality_score|
++-----------+--------------------+-----------+-----+-----------------+-----------------+
+|     030103|MAYO CLINIC HOSPITAL|    PHOENIX|   AZ|                7|               15|
+|     150042|GOOD SAMARITAN HO...|  VINCENNES|   IN|                7|               14|
+|     040118|NEA BAPTIST MEMOR...|  JONESBORO|   AR|                7|               14|
+|     110095|TIFT REGIONAL MED...|     TIFTON|   GA|                7|               14|
+|     120006|CASTLE MEDICAL CE...|     KAILUA|   HI|                7|               14|
+|     010005|MARSHALL MEDICAL ...|       BOAZ|   AL|                7|               14|
+|     140034|   ST MARYS HOSPITAL|  CENTRALIA|   IL|                7|               14|
+|     100315|      VIERA HOSPITAL|  MELBOURNE|   FL|                7|               14|
+|     140101|MORRIS HOSPITAL &...|     MORRIS|   IL|                7|               14|
+|     140162|ST JOSEPH MEDICAL...|BLOOMINGTON|   IL|                7|               14|
++-----------+--------------------+-----------+-----+-----------------+-----------------+
+
+Displaying variability in hospital scores
+*****************************************
++-------+------------------+------------------+
+|summary| avg_quality_score| agg_quality_score|
++-------+------------------+------------------+
+|  count|              3037|              3037|
+|   mean|  4.45604214685545| 9.412907474481397|
+| stddev|1.0023649392252034|1.9400136483740529|
+|    min|                 0|                 1|
+|    max|                 7|                15|
++-------+------------------+------------------+
+
+
+
+

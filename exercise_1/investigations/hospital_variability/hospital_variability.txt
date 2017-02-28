@@ -1,0 +1,58 @@
+In this section, we list the top 10 hospitals and explain the rationale behind our investigation.
+
+Hospitals data has several sets of interesting information regarding hospital quality. This quality data can
+grouped under three broad categories
+
+1. HCAHPS scores - based on patient quality surveys
+2. Readmissions quality socres
+3. Effective care quality scores.
+
+Each of these scores have different min/max values and different distributions. 
+
+The HCAHPS scores are surveys
+on different scales (1 to 9 OR 1 to 10 OR sometimes just a single numerical value). HCAHPS scores summaries
+are captured in two values hcahps_base_score and hcahps_consistency_score that together capture the total
+score for the patient quality experience.
+
+Readmissions quality scores refer to the quality of readmissions and talk about the number of readmissions.
+The lower the number the better.
+
+Effective care refers to how effective the treatment of care has been. It captures the numbers of complications
+resulting from existing treatments and so on.
+
+Given the diverse nature of each of these different scores, this assignment normalizes all the scores on a scale
+of 0 to 10 and uses this scale to compare performance.
+
+Hospital variability shows the mean and variance among hospital quality
+socres.
+
+Summary Hospital Variability Statistics
+***************************************
++-------+--------------------+--------------------+------------------+
+|summary|Overall HCAHPS Score|Effective Care Score|Readmissions Score|
++-------+--------------------+--------------------+------------------+
+|  count|                3037|                3037|              3037|
+|   mean|  3.7454725057622653|   5.667434968719131|6.6200197563384915|
+| stddev|   2.077384237604292|   1.574628996386624|2.0479518908547143|
+|    min|                   0|                   0|                 0|
+|    max|                  10|                  10|                10|
++-------+--------------------+--------------------+------------------+
+
+The results show that for 3037 hospitals that were examined, we have the
+following results
+
+1. Overall HCAHPS SCORE (Normalizes 0-10): There is mean score of 3.74 with a
+rather high standard deviation of 2.08 with some hospitals as low as 0 and some as high
+as 10.
+
+2. Effective Care Score (Normalized 0-10): There is a mean effective care
+score of 5.68 and standard devation of 1.57 with scores as low as 0 and as
+high as 10. 
+
+3. Readmissions Score (Normalized 0-10): There is a mean readmissions score of
+6.62 and a standard deviation of 2.05 with scores as low as 0 and as high as
+10. Note that the readmissions scores has been flipped to show higher values
+indicating better scores and lower values indicating worser scores.
+
+
+

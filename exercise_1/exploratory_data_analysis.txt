@@ -1,0 +1,190 @@
+This section contains some notes from the exploratory data analysis of hospital quality data
+*******************************************************************************************
+
+Some summary data collected on our quality parameters from the base tables
+*************************************************************************
+- survey responses
+    - select count(*) from new_surveys_responses;
+        - 3074
+    - select count(*) from new_surveys_responses where hcahps_base_score >= 0 and hcahps_consistency_score >= 0;
+        - 3042 (32 hospitals do not have one of the above)
+- effective care
+    - select count(*) from new_effective_care
+        - 217821 (across 14 measures)
+    - select count(*) from new_effective_care where score >= 0;
+        - 117917
+    - select max(score) from new_effective_care;
+        - 1180
+- readmissions
+    - select count(*) from readmissions;
+        - 66990 (across 14 measures)
+    - select sum(score),provider_id from readmissions group by provider_id limit 10;
+        - 191.7    010001
+        - 177.0    010005
+        - 195.50000000000003    010006
+        - 138.9    010007
+        - 105.0    010008
+        - 182.20000000000002    010011
+        - 185.5    010012
+        - 191.1    010016
+        - 0.0    010018
+        - 159.9    010019
+        - Time taken: 28.866 seconds, Fetched: 10 row(s)
+
+Hospital rating is viewed as a composite of
+******************************************
+    - total hcahps score
+    - total readmissions score
+    - total effective care score
+
+Explaining scores
+*****************
+- Link - https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/hospital-value-based-purchasing/downloads/HospVBP_ODF_072711.pdf
+- Link - http://www.qualityreportingcenter.com/wp-content/uploads/2016/07/PR_Oct2016_IP-HC-Preview-Report-Help_Guide_FINAL.508.pdf
+- Achievement - My hospital current performance compared to all hospitals' baseline period performance.
+- Improvement - My hospital's current performance compared to my baseline period performance.
+- Two component - Clinicial Process Domain Score and Patient Experience Domain Score(70% + 30%) yields the total performance score.
+- The survey responses are mainly focused on the Patient Experience Domain Score. It consists of HCAHPS base points and consistency points. (80% base score and 20% consistency)
+- Computation of Patient Expereince of Care Domain Score
+    - Greater of improvement or achievement points for each HCAHPS dimension plus consistency points - this is the base score.
+    - Consistency points encourage hospitals to meet or exceed he Achievement Threshold in all HCAHPS dimensions and is calculated based on hospital performance in all dimensions relative to the achievement thresholds for that dimension.
+    - Total score = base score + consistency points.
+- It focuses on the following
+    - Nurse communication
+    - Doctor communication
+    - Staff Responsibility
+    - Pain management
+    - Medicine Communication
+    - Clean and Quiet
+    - Discharge Information
+
+readmissions
+************
+- Hospital compare (better, worse, same) is based on lower estimate of score.
+- Lower is better for readmissions.
+- measure start dates
+    - 07/01/2011
+    - 07/01/2013
+- measure end dates
+    - 06/30/2014
+- Unique start date/end date combinations
+    - 07/01/2011    06/30/2014 - 62205 non-unique hospitals
+    - 07/01/2013    06/30/2014 - 4785 non-unique hospitals
+- distinct providers/hospitals - 4785
+- total records - 66990
+- 14 measures for each hospital
+    - Acute Myocardial Infarction (AMI) 30-Day Mortality Rate
+    - Death rate for CABG
+    - Death rate for chronic obstructive pulmonary disease (COPD) patients
+    - Heart failure (HF) 30-Day Mortality Rate
+    - Pneumonia (PN) 30-Day Mortality Rate
+    - Death rate for stroke patients
+    - Acute Myocardial Infarction (AMI) 30-Day Readmission Rate
+    - Rate of unplanned readmission for CABG
+    - Rate of unplanned readmission for chronic obstructive pulmonary disease (COPD) patients
+    - Heart failure (HF) 30-Day Readmission Rate
+    - Rate of readmission after hip/knee surgery
+    - Rate of readmission after discharge from hospital (hospital-wide)
+    - Pneumonia (PN) 30-Day Readmission Rate
+    - Rate of unplanned readmission for stroke patients
+- select count(*) from readmissions where measure_start_date like
+    - '07/01/2011' and measure_end_date like '06/30/2012'
+
+measures - mapping of measures to codes
+***************************************
+- 100 measure ids
+- 106 measure_names  -the last measure id corresponds to 6 measure names
+- count(measure_name) > 1
+    - 2    Prophylactic Antibiotic Selection for Surgical Patients
+- count(measure_id> > 1
+    - 0 records
+
+effective care
+**************
+- 50 distinct measures
+- Number of distinct providers - 4610
+- Total records - 217821 (4610*50 = 230500)
+- Most number of measures at Memorial hospital folled by good smaramtan hospital, meercy hospital and st joseph hospital
+- Scores
+    - min-0, max 1180
+    - 99000 records have an unusual score (45 percent). These are numbers for EDV or Emergency Deparatment volume that appear to have somehow gotten into this table. These values will be ignored for our analysis.
+        - High (40,000 - 59,999 patients annually)
+        - Low (0 - 19,999 patients annually)
+        - Medium (20,000 - 39,999 patients annually)
+        - Not Available
+        - Very High (60,000+ patients annually)
+    - scores range from 0 to
+- Counts of measures
+    - Max reports on Profpylactic Antibiotic Selection
+    - Minimum on
+        - Relievers for Inpatient asthma
+        - Systemic Corticosteroids for
+        - Home Management Plan
+    - Rest are all about the same at close to 5000 count
+- Distinct start and end dates
+    - 01/01/2013    12/31/2013
+    - 01/01/2014    09/30/2014
+    - 10/01/2013    03/31/2014
+    - 10/01/2013    09/30/2014
+- Looking at the distribution of scores for effective across various measures
+    - 100    Not Available    ACEI or ARB for LVSD
+    - 100    Not Available    Anticoagulation Therapy for Atrial Fibrillation/Flutter
+    - 100    Not Available    Anticoagulation overlap therapy
+    - 0    Not Available    Antithrombotic Therapy by End of Hospital Day 2
+    - 100    Not Available    Aspirin at Arrival
+    - 100    Not Available    Aspirin prescribed at discharge
+    - 100    Not Available    Assessed for Rehabilitation
+    - Not Available    Not Available    Cardiac surgery patients with controlled 6 a.m. postoperative blood glucose
+    - 0    Not Available    Discharge instructions
+    - 100    Not Available    Discharged on Antithrombotic Therapy
+    - 100    Not Available    Discharged on Statin Medication
+    - 0    Not Available    Door to diagnostic eval
+    - 100    Not Available    ED1
+    - 0    Not Available    ED2
+    - High (40,000 - 59,999 patients annually)    Very High (60,000+ patients annually)    Emergency department volume
+    - 0    Not Available    Evaluation of LVS Function
+    - 27    Not Available    Fibrinolytic Therapy Received Within 30 Minutes Of Hospital Arrival
+    - 100    Not Available    Fibrinolytic Therapy Received Within 30 Minutes of ED Arrival
+    - 0    Not Available    Head CT results
+    - 100    99    Healthcare workers given influenza vaccination
+    - 100    Not Available    Home Management Plan of Care Document
+    - 0    Not Available    ICU venous thromboembolism prophylaxis
+    - 0    Not Available    Immunization for influenza
+    - 0    Not Available    Incidence of potentially preventable VTE
+    - 100    Not Available    Initial antibiotic selection for CAP in immunocompetent patient
+    - 0    Not Available    Left before being seen
+    - 0    Not Available    Median Time to ECG
+    - 15    Not Available    Median Time to Fibrinolysis
+    - 100    Not Available    Median Time to Transfer to Another Facility for Acute Coronary Intervention
+    - 100    Not Available    Median time to pain med
+    - 100    Not Available    OP 18
+    - 0    Not Available    Percent of newborns whose deliveries were scheduled early (1-3 weeks early), when a scheduled delivery was not medically necessary
+    - 100    Not Available    Postoperative Urinary Catheter Removal
+    - 100    Not Available    Primary PCI Received Within 90 Minutes of Hospital Arrival
+    - 100    Not Available    Prophylactic Antibiotic Initiated Within One Hour Prior to Surgical Incision
+    - 100    Not Available    Prophylactic Antibiotic Selection for Surgical Patients
+    - 0    Not Available    Prophylactic antibiotic received within 1 hour prior to surgical incision
+    - 100    Not Available    Prophylactic antibiotics discontinued within 24 hours after surgery end time
+    - 100    Not Available    Relievers for Inpatient Asthma
+    - 100    Not Available    Statin at Discharge
+    - 0    Not Available    Stroke Education
+    - 0    Not Available    Surgery Patients Who Received Appropriate Venous Thromboembolism Prophylaxis Within 24 Hours Prior to Surgery to 24 Hours After Surgery
+    - 100    Not Available    Surgery Patients on a Beta Blocker Prior to Arrival Who Received a Beta Blocker During the Perioperative Period
+    - 100    Not Available    Surgery Patients with Perioperative Temperature Management
+    - 100    Not Available    Systemic Corticosteroids for Inpatient Asthma
+    - 0    Not Available    Thrombolytic Therapy
+    - 0    Not Available    Unfractionated heparin with dosages/platelet count monitoring
+    - 0    Not Available    Venous Thromboembolism (VTE) Prophylaxis
+    - 0    Not Available    Venous thromboembolism prophylaxis
+    - 0    Not Available    Warfarin therapy discharge instructions
+- Example measures
+    - ACEI or ARB for LVSD
+    - Anticoagulation Therapy for Atrial Fibrillation/Flutter
+    - Anticoagulation overlap therapy
+    - Antithrombotic Therapy by End of Hospital Day 2
+    - Aspirin at Arrival
+    - Aspirin prescribed at discharge
+    - Assessed for Rehabilitation
+    - Cardiac surgery patients with controlled 6 a.m. postoperative blood glucose
+    - Discharge instructions
+    - Discharged on Antithrombotic Therap

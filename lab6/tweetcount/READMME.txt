@@ -1,0 +1,5 @@
+This program demonstrates counting of words in a hypothetical twitter stream.
+
+Useful References:
+
+http://streamparse.readthedocs.io/en/latest/quickstart.html

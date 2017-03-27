@@ -20,38 +20,32 @@ class StdOutListener(StreamListener):
         print "Start Time = %s"%(str(ctime()))
         self.timer = timer
         self.count = 0
+        
 
-	def on_status(self,status):
-		print status.text
+    def on_data(self, data):
+        try:
+            self.endTime = time()
+            self.elapsedTime = self.endTime - self.startTime
+            if self.elapsedTime <= self.timer:
+                self.dataJson =simplejson.loads(data[:-1])
+                self.dataJsonText = self.dataJson["text"].lower()
+                self.count += 1
+                if "trump" in self.dataJsonText:
+                    print self.dataJsonText
 
-	def on_data(self,data):
-		print data
-
-#    def on_data(self, data):
-#        try:
-#            self.endTime = time()
-#            self.elapsedTime = self.endTime - self.startTime
-#            if self.elapsedTime <= self.timer:
-#                self.dataJson =simplejson.loads(data[:-1])
-#                self.dataJsonText = self.dataJson["text"].lower()
-#                self.count += 1
-#		#print data
-#                print self.dataJsonText
-#                #if "Hello" in self.dataJsonText:
-#                #    print self.dataJsonText
-#
-#            else:
-#                print "Count== ",self.count
-#                print "End Time = %s"%(str(ctime()))
-#                print "Elapsed Time = %s"%(str(self.elapsedTime))
+            else:
+                print "Count== ",self.count
+                print "End Time = %s"%(str(ctime()))
+                print "Elapsed Time = %s"%(str(self.elapsedTime))
 
 
-#                return False
-#            return True
-#        except Exception, e:
-#            # Catch any unicode errors while printing to console
-#            # and just ignore them to avoid breaking application.
-#            pass
+
+                return False
+            return True
+        except Exception, e:
+            # Catch any unicode errors while printing to console
+            # and just ignore them to avoid breaking application.
+            pass
 
     def on_error(self, status):
         print ("ERROR :",status)
@@ -59,9 +53,6 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
     # to collect the data for 1 min
     l = StdOutListener(60)
-    mystream = tweepy.Stream(auth, l, timeout=60) 
-    mystream.filter(track=['london','global','python','comcastcares','comcast'])
+    mystream = tweepy.Stream(auth, l, timeout=60)
     mystream.sample()
-
-
 

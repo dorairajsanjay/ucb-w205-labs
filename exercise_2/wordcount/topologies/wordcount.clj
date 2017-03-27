@@ -5,23 +5,16 @@
 (defn wordcount [options]
    [
     ;; spout configuration
-    {"sentence-spout" (python-spout-spec
+    {"word-spout" (python-spout-spec
           options
-          "spouts.sentences.Sentences"
-          ["sentence"]
+          "spouts.words.WordSpout"
+          ["word"]
           )
     }
     ;; bolt configuration
-    {"sentence-splitter" (python-bolt-spec
+    {"count-bolt" (python-bolt-spec
           options
-          {"sentence-spout" :shuffle}
-          "bolts.splitter.SentenceSplitter"
-          ["word"]
-          :p 2
-          )
-     "count-bolt" (python-bolt-spec
-          options
-          {"sentence-splitter" ["word"]}
+          {"word-spout" :shuffle}
           "bolts.wordcount.WordCounter"
           ["word" "count"]
           :p 2

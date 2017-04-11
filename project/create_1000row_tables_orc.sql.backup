@@ -1,0 +1,21 @@
+SET hive.exec.dynamic.partition.mode=nonstrict;
+
+use  elections;
+
+create table pvrdr_vrd_1000_orc 
+clustered by (registrantid) into 2 buckets 
+stored as orc 
+TBLPROPERTIES('transactional'='true')
+as select * from pvrdr_vrd limit 1000; 
+
+#create table pvrdr_pd_1000_orc 
+#clustered by (registrantid) into 2 buckets 
+#as select * from pvrdr_pd limit 1000
+#stored as orc 
+#TBLPROPERTIES('transactional'='true');
+#
+#create table pvrdr_vph_1000_orc 
+#clustered by (registrantid) into 2 buckets 
+#as select * from pvrdr_vph limit 1000
+#stored as orc 
+#TBLPROPERTIES('transactional'='true');

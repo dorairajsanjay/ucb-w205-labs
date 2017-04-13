@@ -1,0 +1,70 @@
+USE elections;
+DROP TABLE zipcensus;
+CREATE EXTERNAL TABLE zipcensus
+(
+Zip STRING,
+Population STRING,
+Male STRING,
+M0 STRING,
+M18 STRING,
+M30 STRING,
+M40 STRING,
+M50 STRING,
+M60 STRING,
+M70 STRING,
+M80 STRING,
+MMedianAge STRING,
+M18plus STRING,
+M65plus STRING,
+Female STRING,
+F0 STRING,
+F18 STRING,
+F30 STRING,
+F40 STRING,
+F50 STRING,
+F60 STRING,
+F70 STRING,
+F80 STRING,
+FMedianAge STRING,
+F18plus STRING,
+F65plus STRING,
+White STRING,
+Black STRING,
+Namerican STRING,
+Asian STRING,
+Islander STRING,
+Other STRING,
+Multiracial STRING,
+WhiteNAmerican STRING,
+WhiteAsian STRING,
+WhiteBlack STRING,
+WhiteOther STRING,
+Latino STRING,
+LatinoWhite STRING,
+LatinoBlack STRING,
+LatinoNAmerican STRING,
+LatinoOther STRING,
+LatinoMulti STRING,
+Mprison STRING,
+Fprison STRING,
+AvgHouseholdSize STRING,
+AvgFamilySize STRING,
+Housing STRING,
+Vacancy STRING,
+OOVacancyRate STRING,
+RentalVacancyRate STRING,
+OccupiedUnits STRING,
+OOUnits STRING,
+OOPop STRING,
+RentedUnits STRING,
+RentingPop STRING
+)
+
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES(
+"separatorChar"=",",
+"quoteChar"='"',
+"escapeChar" = '\\'
+)
+STORED AS TEXTFILE
+LOCATION '/user/w205/election_data/zipcensus';

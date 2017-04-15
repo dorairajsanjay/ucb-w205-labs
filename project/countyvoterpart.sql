@@ -67,3 +67,21 @@ WITH SERDEPROPERTIES(
 )
 STORED AS TEXTFILE
 LOCATION '/user/w205/election_data/countyvoterpart';
+
+use elections;
+drop table countytable;
+create external table countytable
+(
+County  STRING,
+countycode  STRING,
+CountyJoined  STRING,
+CountyUnderscore  STRING
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES(
+"separatorChar"="\t",
+"quoteChar"='"',
+"escapeChar" = '\\'
+)
+STORED AS TEXTFILE
+LOCATION '/user/w205/election_data/countytable';

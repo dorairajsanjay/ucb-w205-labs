@@ -154,3 +154,25 @@ from voter_grand_royale
 where partycode in ("REP","DEM","LIB","GRN") and year(to_date(registrationdate)) > '2007'
 group by year(to_date(registrationdate)) ,partycode
 order by reg_year,regid_count desc
+
+# Looking for registereds vs actuals
+************************************
+
+use elections;
+drop table registered_vs_actuals;
+create table registered_vs_actuals as 
+
+select a.countycode,b.county,
+
+sum(case when a.partycode='DEM' then 1 else 0 end) as registered_dems,
+c.2016ge_dem as dem_votes,
+cast(sum(case when a.partycode='DEM' then 1 else 0 end) - regexp_replace(c.2016ge_dem,',','') as int) as dem_voters_lost,
+
+sum(case when a.partycode='REP' then 1 else 0 end) as registered_reps,
+c.2016ge_rep as reps_votes,
+cast(sum(case when a.partycode='REP' then 1 else 0 end) - regexp_replace(c.2016ge_rep,',','') as int) as rep_voters_lost
+
+from voter_grand_royale a
+join countytable b on (cast(a.countycode as int)=cast(b.countycode as int))
+join cavotingresultsbyparty c on (b.county=c.county)
+group by a.countycode,b.county,c.2016ge_dem,c.2016ge_rep;

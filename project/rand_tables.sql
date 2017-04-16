@@ -63,3 +63,20 @@ distribute by rand()
 sort by rand()
 limit 10000;
 
+use elections;
+drop table voter_grand_royale_10k;
+create table voter_grand_royale_10k as
+select * from voter_grand_royale
+where rand() <= 0.0001
+distribute by rand()
+sort by rand()
+limit 10000;
+
+use elections;
+drop table voter_grand_royale_1000;
+create table voter_grand_royale_1000 as
+select * from voter_grand_royale
+where rand() <= 0.0001
+distribute by rand()
+sort by rand()
+limit 1000;

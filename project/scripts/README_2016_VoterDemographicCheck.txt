@@ -1,0 +1,5 @@
+These are the instructions to help run 2016_VoterDemographicCheck.py. This file is intended to be run in spyder. It requires two csv files: "county_general.csv" and "demo_fonal.csv". These files should be placed in the same directory as the .py file.
+
+Upon hitting the run file button, a tkinter window will open. You can select which counties, denominators (please only select 1), genders, parties and age groups. The last three groups have to the option to get aggregated (non-drilldown) data. You will need to pick at least 1 specific category in gender, party or age group to get results. It's easier to read the end results if fewer options are chosen. After picking your demographics, close the window and then the program will continue in the spyder console.
+
+The program will calculate the number of people who fall into the combination of groups you have picked. Your choice of denominator will determine what proportion the final data will provide.

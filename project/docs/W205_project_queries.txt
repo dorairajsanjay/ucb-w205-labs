@@ -1,0 +1,197 @@
+
+Total counts of "Consistent Voters" for each party, in each county
+#THIS WORKS
+
+select COUNT(v.registrantid) as county_level_count, v.partycode, v.countycode
+
+from voter_grand_royale v
+where v.2016ge_method IS NOT NULL AND v.2014ge_method IS NOT NULL 
+AND v.2012ge_method IS NOT NULL and v.2010ge_method IS NOT NULL and v.2008ge_method IS NOT NULL
+group by v.countycode, v.partycode
+
+order by county_level_count DESC
+
+
+Total counts of "New Voters" for each party in each county
+#THIS WORKS
+
+select COUNT(v.registrantid) as county_level_count, v.partycode, v.countycode
+
+from voter_grand_royale v
+
+where v.2016ge_method IS NOT NULL AND v.2014ge_method IS NULL 
+and v.2012ge_method IS NULL and v.2010ge_method IS NULL and 2008ge_method IS NULL
+group by v.countycode, v.partycode
+
+order by county_level_count DESC
+
+
+Total counts of "New Voters" (of age) statewide.
+#THIS WORKS
+
+select count(voterdate.registrantid) as votercount, voterdate.countycode, voterdate.partycode
+
+FROM (select registrantid, cast(to_date(from_unixtime(unix_timestamp(dob, 'yyyy-MM-dd'))) as date) as date, countycode, partycode
+
+from voter_grand
+_royale
+where 2016ge_method IS NOT NULL AND 2014ge_method IS NULL and 2012ge_method IS NULL and 2010ge_method IS NULL and 2008ge_method IS NULL
+) as voterdate
+
+where voterdate.date < 1982-02-02
+
+group by voterdate.countycode, voterdate.partycode
+
+sort by votercount DESC
+
+
+PERCENT registered to each major party statewide.
+#THIS WORKS
+
+SELECT u.partycode, count(u.registrantid)/v.count_value_sum as percentage
+FROM voter_grand u
+JOIN
+(SELECT count(registrantid) AS count_value_sum 
+FROM voter_grand) v
+WHERE u.partycode IN ("DEM", "GRN", "LIB", "REP") 
+GROUP BY u.partycode, v.count_value_sum
+
+
+PERCENT registered to each major party, by county.
+#THIS WORKS
+
+Select t.countycode, t.partycode, count(t.registrantid)/s.count_value_sum as percentage
+FROM voter_grand t
+JOIN (SELECT countycode, count(registrantid) AS count_value_sum 
+FROM voter_grand
+GROUP BY countycode) s
+ON s.countycode = t.countycode 
+WHERE partycode IN ("DEM", "REP", "GRN", "LIB")
+GROUP BY t.countycode, t.partycode, s.count_value_sum
+
+
+Where do county-level party mixes differ most from state averages?
+#THIS WORKS 
+
+Select t.countycode, t.partycode, (count(t.registrantid)/s.count_value_sum)/w.percentage as county_v_natl_pct
+FROM voter_grand t
+JOIN (SELECT countycode, count(registrantid) AS count_value_sum 
+FROM voter_grand
+GROUP BY countycode) s
+ON s.countycode = t.countycode 
+JOIN (SELECT u.partycode, count(u.registrantid)/v.count_value_sum as percentage
+FROM voter_grand u
+JOIN
+(SELECT count(registrantid) AS count_value_sum 
+FROM voter_grand) v
+WHERE u.partycode IN ("DEM", "GRN", "LIB", "REP")
+GROUP BY u.partycode, v.count_value_sum) w
+ON w.partycode = t.partycode
+WHERE t.partycode IN ("DEM", "REP", "GRN", "LIB")
+GROUP BY t.countycode, t.partycode, s.count_value_sum, w.percentage
+ORDER BY county_v_natl_pct DESC
+
+
+Statewide PARTY AFFILIATION OF THOSE WHO VOTED:
+#THIS WORKS
+
+SELECT u.partycode, count(u.registrantid)/v.count_value_sum as percentage
+FROM voter_grand u
+JOIN
+(SELECT count(registrantid) AS count_value_sum 
+FROM voter_grand) v
+WHERE u.partycode IN ("DEM", "GRN", "LIB", "REP", "NPP") AND u.2016ge_method IS NOT NULL
+GROUP BY u.partycode, v.count_value_sum
+
+
+How does the statewide party breakdown of people who voted compare to the breakdown of those registered?
+#THIS WORKS
+
+SELECT u.partycode, count(u.registrantid)/v.count_value_sum as votedpct, w.percentage as registeredpct
+FROM voter_grand u
+JOIN
+(SELECT count(registrantid) AS count_value_sum 
+FROM voter_grand
+WHERE 2016ge_method IS NOT NULL) v
+JOIN 
+(SELECT s.partycode, count(s.registrantid)/t.count_value_sum as percentage
+FROM voter_grand s
+JOIN
+(SELECT count(registrantid) AS count_value_sum 
+FROM voter_grand) t
+GROUP BY s.partycode, t.count_value_sum) w
+ON w.partycode = u.partycode
+WHERE u.partycode IN ("DEM", "GRN", "LIB", "REP", "NPP") AND u.2016ge_method IS NOT NULL
+GROUP BY u.partycode, v.count_value_sum, w.percentage
+
+
+As above, but using headcount rather than percentage
+#THIS WORKS
+
+SELECT count(registrantid)
+FROM voter_grand_10k
+WHERE partycode IN ("DEM", "GRN", "LIB", "REP", "NPP"), and 2016ge_method IS NOT NULL
+GROUP BY partycode
+
+
+
+
+
+
+
+
+Check for duplicate records in voter_grand_royale
+
+SELECT COUNT(DISTINCT registrantid) as distinct, COUNT(registrantid) as count
+FROM voter_grand_royale
+
+
+
+Exploring census data
+
+
+SELECT AVG(oopop), AVG(rentingpop)
+FROM zipcensus
+
+ALL ABOUT MODOC:
+Select *
+FROM zipcensus
+WHERE zip IN (96108, 96110, 96112, 96116, 96115, 97635, 96015, 96101, 96104)
+
+
+CREATING A PERCENTAGE MEASURE:
+
+STEP ONE: find the denominator
+
+SELECT count(registrantid) as count_value_sum
+FROM voter_grand
+
+STEP TWO: wrap it & join it back to itself
+
+SELECT *
+FROM voter_grand a
+JOIN
+(SELECT count(registrantid) as count_value_sum
+FROM voter_grand) b
+
+STEP THREE: create the percentage calculation in SELECT
+SELECT a.partycode, count(a.registrantid)/b.count_value_sum as percentage
+FROM voter_grand a
+JOIN 
+(SELECT count(registrantid) as count_value_sum
+FROM voter_grand) b
+GROUP BY a.partycode, b.count_value_some
+
+STEP FOUR: add a WHERE statement
+SELECT a.partycode, count(a.registrantid)/b.count_value_sum as percentage
+FROM voter_grand a
+JOIN 
+(SELECT count(registrantid) as count_value_sum
+FROM voter_grand) b
+WHERE a.partycode IN ("DEM", "GRN", "LIB", "REP") 
+GROUP BY a.partycode, b.count_value_some
+
+
+
+
+
